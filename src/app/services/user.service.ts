@@ -10,7 +10,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   getAllUsers() {
-    return this.httpClient.get(`${this.apiUrl}?per_page=20`);
+    return this.httpClient.get(`${this.apiUrl}?per_page=10`);
   }
 
   getSingleUser(username: String) {
