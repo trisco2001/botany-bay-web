@@ -5,9 +5,6 @@ import { Component } from '@angular/core';
   template: `
     <app-header></app-header>
 
-    <app-contact></app-contact>
-    <app-home></app-home>
-
     <router-outlet></router-outlet>
 
     <app-footer></app-footer>
@@ -16,4 +13,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'botany-bay-web';
+
+  constructor() {}
 }
