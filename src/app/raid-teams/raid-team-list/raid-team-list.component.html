@@ -1,0 +1,28 @@
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Raiding Team</h1>
+        </div>
+    </div>
+</section>
+
+<a routerLink="/raid-teams/new">
+    <button class="button is-large">Create a Raid Team</button>
+</a>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-multiline" *ngIf="raidTeams">
+            <div class="column is-4" *ngFor="let raidTeam of raidTeams">
+                <div class="card">
+                    <a routerLink="/raid-teams/{{raidTeam.id}}">
+                        <div class="card-content">
+                            <h1>{{ raidTeam.name }}</h1>
+                            <h3>{{ raidTeam.server }}</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

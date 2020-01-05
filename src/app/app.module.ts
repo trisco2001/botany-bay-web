@@ -7,13 +7,19 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { CoreModule } from './core/core.module';
+import { RaidTeamCreateComponent } from './raid-teams/raid-team-create/raid-team-create.component';
+import { RaidTeamListComponent } from './raid-teams/raid-team-list/raid-team-list.component';
+import { RaidTeamManageComponent } from './raid-teams/raid-team-manage/raid-team-manage.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    RaidTeamCreateComponent,
+    RaidTeamListComponent,
+    RaidTeamManageComponent
   ],
   imports: [
     BrowserModule,
