@@ -5,3 +5,9 @@
         </div>
     </div>
 </section>
+<section class="section">
+    <div class="container" *ngIf="raidTeam">
+        <app-add-team-member [raidTeamId]="raidTeam.id"></app-add-team-member>
+        <app-list-team-members [raidTeamId]="raidTeam.id"></app-list-team-members>
+    </div>
+</section>

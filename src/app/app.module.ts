@@ -10,6 +10,8 @@ import { CoreModule } from './core/core.module';
 import { RaidTeamCreateComponent } from './raid-teams/raid-team-create/raid-team-create.component';
 import { RaidTeamListComponent } from './raid-teams/raid-team-list/raid-team-list.component';
 import { RaidTeamManageComponent } from './raid-teams/raid-team-manage/raid-team-manage.component';
+import { AddTeamMemberComponent } from './raid-teams/raid-team-manage/add-team-member/add-team-member.component';
+import { ListTeamMembersComponent } from './raid-teams/raid-team-manage/list-team-members/list-team-members.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { RaidTeamManageComponent } from './raid-teams/raid-team-manage/raid-team
     ContactComponent,
     RaidTeamCreateComponent,
     RaidTeamListComponent,
-    RaidTeamManageComponent
+    RaidTeamManageComponent,
+    AddTeamMemberComponent,
+    ListTeamMembersComponent
   ],
   imports: [
     BrowserModule,

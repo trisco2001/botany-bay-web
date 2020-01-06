@@ -1,0 +1,45 @@
+<p>add-team-member works!</p>
+
+<section class="section">
+    <div class="container">
+        <form (ngSubmit)="submitForm()" #form="ngForm">
+            <!-- name -->
+            <div class="field">
+                <label class="label">Character Name</label>
+                <input
+                    type="text"
+                    name="name"
+                    class="input"
+                    [(ngModel)]="name" 
+                    #nameInput="ngModel"
+                    required
+                    />
+                <div class="help is-error" *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)">
+                    Your character needs a name.
+                </div>
+            </div>
+
+            <!-- name -->
+            <div class="field">
+                <label class="label">Home Server</label>
+                <input
+                    type="text"
+                    name="server"
+                    class="input"
+                    [(ngModel)]="server" 
+                    #serverInput="ngModel"
+                    required
+                    />
+                <div class="help is-error" *ngIf="serverInput.invalid && (serverInput.dirty || serverInput.touched)">
+                    The server your character is based on.
+                </div>
+            </div>
+
+            <!-- submit button -->
+            <button
+                type="submit"
+                class="button is-large is-warning"
+                [disabled]="form.invalid">Add Character</button>
+        </form>
+    </div>
+</section>
