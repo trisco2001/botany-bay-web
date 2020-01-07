@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TeamMembersService } from 'src/app/core/services/team-members.service';
+import { TeamManagerService } from '../services/team-manager.service';
 
 @Component({
   selector: 'app-add-team-member',
@@ -11,7 +12,8 @@ export class AddTeamMemberComponent implements OnInit {
   name: string;
   server: string;
 
-  constructor(private teamMembersService: TeamMembersService) { }
+  constructor(private teamMembersService: TeamMembersService,
+    private teamManagerService: TeamManagerService) { }
 
   ngOnInit() {
   }
@@ -21,7 +23,9 @@ export class AddTeamMemberComponent implements OnInit {
       this.raidTeamId,
       this.name,
       this.server).subscribe(observer => {
-        
+        this.teamManagerService.announceTeamMemberCreated({name: this.name, server: this.server});
+        this.name = "";
+        this.server = "";
       });
   }
 }

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RaidTeamsService } from 'src/app/core/services/raid-teams.service';
 import { ActivatedRoute } from '@angular/router';
+import { TeamManagerService } from './services/team-manager.service';
 
 @Component({
   selector: 'app-raid-team-manage',
   templateUrl: './raid-team-manage.component.html',
-  styleUrls: ['./raid-team-manage.component.scss']
+  styleUrls: ['./raid-team-manage.component.scss'],
+  providers: [TeamManagerService]
 })
 export class RaidTeamManageComponent implements OnInit {
   raidTeam;

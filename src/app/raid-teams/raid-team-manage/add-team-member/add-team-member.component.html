@@ -1,5 +1,3 @@
-<p>add-team-member works!</p>
-
 <section class="section">
     <div class="container">
         <form (ngSubmit)="submitForm()" #form="ngForm">
@@ -14,9 +12,9 @@
                     #nameInput="ngModel"
                     required
                     />
-                <div class="help is-error" *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)">
+                <!-- <div class="help is-error" *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)">
                     Your character needs a name.
-                </div>
+                </div> -->
             </div>
 
             <!-- name -->
@@ -30,9 +28,9 @@
                     #serverInput="ngModel"
                     required
                     />
-                <div class="help is-error" *ngIf="serverInput.invalid && (serverInput.dirty || serverInput.touched)">
+                <!-- <div class="help is-error" *ngIf="serverInput.invalid && (serverInput.dirty || serverInput.touched)">
                     The server your character is based on.
-                </div>
+                </div> -->
             </div>
 
             <!-- submit button -->
