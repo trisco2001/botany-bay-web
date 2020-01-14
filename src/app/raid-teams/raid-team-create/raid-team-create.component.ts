@@ -23,7 +23,7 @@ export class RaidTeamCreateComponent implements OnInit {
     this.raidTeamsService.createRaidTeam(this.name, this.server)
       .subscribe(observer => {
         this.enabled = true;
-        this.router.navigate(['raid-teams', observer.id])
+        this.router.navigate(['raid-teams', observer.id, 'manage'])
       });
   }
 }

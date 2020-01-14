@@ -10,7 +10,7 @@ import { TeamManagerService } from '../services/team-manager.service';
 export class ListTeamMembersComponent implements OnInit {
   @Input("raidTeamId") raidTeamId: string;
 
-  teamMembers: Array<{name: string}>;
+  teamMembers: Array<{name: string, id: string, role?: string}>;
 
   constructor(
     private teamMemberService: TeamMembersService,
@@ -27,7 +27,24 @@ export class ListTeamMembersComponent implements OnInit {
 
   private refreshTeamList() {
     this.teamMemberService.getAllTeamMembers(this.raidTeamId).subscribe(teamMembers => {
-      this.teamMembers = teamMembers.Items;
+      this.teamMembers = teamMembers.Items.sort((a, b) => a.name.localeCompare(b.name));
     });
+  }
+
+  deleteTeamMember(teamMember: {id: string}) {
+    this.teamMemberService.removeRaidTeamMember(this.raidTeamId, teamMember.id).subscribe(_ => {
+      this.teamMembers = this.teamMembers.filter(value => value.id != teamMember.id);
+    });
+  }
+
+  setRole(teamMember: {id: string}, role: string) {
+    this.teamMemberService.setTeamMemberRole(this.raidTeamId, teamMember.id, role).subscribe(_ => {
+      this.teamMembers = this.teamMembers.map(value => {
+        if (value.id == teamMember.id) {
+          value.role = role;
+        }
+        return value;
+      })
+    })
   }
 }

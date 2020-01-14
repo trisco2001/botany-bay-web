@@ -1,17 +1,25 @@
 <section class="hero is-primary is-bold">
     <div class="hero-body">
         <div class="container">
-            <h1 class="title">Raiding Team</h1>
+            <h1 class="title">Teams</h1>
+        </div>
+        <div class="container">
+            
+            <a routerLink="/raid-teams/new">
+                <button class="button">Create a Raid Team</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="columns is-desktop">
+        <div class="colunn">
         </div>
     </div>
 </section>
 
-<a routerLink="/raid-teams/new">
-    <button class="button is-large">Create a Raid Team</button>
-</a>
-
 <section class="section">
     <div class="container">
+        
         <div class="columns is-multiline" *ngIf="raidTeams">
             <div class="column is-4" *ngFor="let raidTeam of raidTeams">
                 <div class="card">

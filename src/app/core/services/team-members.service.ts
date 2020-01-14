@@ -8,9 +8,11 @@ interface TeamMember {
   createdAt: number;
   id: string;
   updatedAt: string;
+  characterData?: any;
+  role?: string;
 }
 
-interface AllTeamMembersResponse {
+export interface AllTeamMembersResponse {
   Items: TeamMember[];
   Count: number;
   ScannedCount: number;
@@ -39,6 +41,14 @@ export class TeamMembersService {
 
   addRaidTeamMember(raidTeamId: string, name: string, server: string) {
     return this.httpClient.post<AddTeamMemberResponse>(`${this.apiUrl}/${raidTeamId}/team-members`, { name: name, server: server });
+  }
+
+  removeRaidTeamMember(raidTeamId: string, id: string) {
+    return this.httpClient.delete(`${this.apiUrl}/${raidTeamId}/team-members/${id}`);
+  }
+
+  setTeamMemberRole(raidTeamId: string, id: string, role: string) {
+    return this.httpClient.put(`${this.apiUrl}/${raidTeamId}/team-members/${id}`, {role});
   }
 
 }

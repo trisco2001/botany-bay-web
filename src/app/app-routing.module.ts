@@ -5,6 +5,7 @@ import { ContactComponent } from './contact/contact.component';
 import { RaidTeamCreateComponent } from './raid-teams/raid-team-create/raid-team-create.component';
 import { RaidTeamListComponent } from './raid-teams/raid-team-list/raid-team-list.component';
 import { RaidTeamManageComponent } from './raid-teams/raid-team-manage/raid-team-manage.component';
+import { RaidTeamViewComponent } from './raid-teams/raid-team-view/raid-team-view.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'users', loadChildren: 'src/app/users/users.module#UsersModule'},
   {path: 'raid-teams/new', component: RaidTeamCreateComponent},
   {path: 'raid-teams', component: RaidTeamListComponent},
-  {path: 'raid-teams/:id', component: RaidTeamManageComponent}
+  {path: 'raid-teams/:id', component: RaidTeamViewComponent},
+  {path: 'raid-teams/:id/manage', component: RaidTeamManageComponent}
 ];
 
 @NgModule({

@@ -11,13 +11,55 @@
         <div class="columns is-multiline" *ngIf="teamMembers">
             <div class="column is-4" *ngFor="let teamMember of teamMembers">
                 <div class="card">
-                    <a routerLink="/raid-teams/{{raidTeamId}}/team-members/{{teamMember.id}}">
-                        <div class="card-content">
-                            <h1>{{ teamMember.name }}</h1>
-                            <h3>{{ teamMember.server }}</h3>
-                            <h3 *ngIf="teamMember.characterData">{{ teamMember.characterData.items.averageItemLevelEquipped }}</h3>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img src="http://render-us.worldofwarcraft.com/character/{{teamMember.characterData.thumbnail}}" alt="{{teamMember.name}}">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">{{teamMember.name}}</p>
+                                <p class="subtitle is-6">{{teamMember.server}}</p>
+                            </div>
                         </div>
-                    </a>
+                  
+                        <div class="content">
+                            <span class="icon is-small"><i class="fas fa-user-shield"></i></span>  {{teamMember.characterData.items.averageItemLevelEquipped | number : '1.1-1'}}<br>
+                            <span class="icon is-small"><i class="fas fa-heart"></i></span> 
+                            {{teamMember.characterData.items.neck.itemLevel}}<br>
+                        
+                            <div class="tabs is-toggle is-toggle-rounded">
+                                <ul>
+                                <li [className]="teamMember.role == 'tank' ? 'is-active' : ''">
+                                    <a (click)="setRole(teamMember, 'tank')">
+                                    <span>Tank</span>
+                                    </a>
+                                </li>
+                                <li [className]="teamMember.role == 'healer' ? 'is-active' : ''">
+                                    <a (click)="setRole(teamMember, 'healer')">
+                                    <span>Healer</span>
+                                    </a>
+                                </li>
+                                <li [className]="teamMember.role == 'rdps' ? 'is-active' : ''">
+                                    <a (click)="setRole(teamMember, 'rdps')">
+                                    <span>RDPS</span>
+                                    </a>
+                                </li>
+                                <li [className]="teamMember.role == 'mdps' ? 'is-active' : ''">
+                                    <a (click)="setRole(teamMember, 'mdps')">
+                                    <span>MDPS</span>
+                                    </a>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item">Edit</a>
+                        <a class="card-footer-item" (click)="deleteTeamMember(teamMember)">Delete</a>
+                    </footer>
                 </div>
             </div>
         </div>
