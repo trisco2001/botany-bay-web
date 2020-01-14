@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TeamMembersService } from 'src/app/core/services/team-members.service';
 import { TeamManagerService } from '../services/team-manager.service';
 
+import { webSocket, WebSocketSubject} from 'rxjs/webSocket';
+
 @Component({
   selector: 'app-add-team-member',
   templateUrl: './add-team-member.component.html',
@@ -22,10 +24,14 @@ export class AddTeamMemberComponent implements OnInit {
     this.teamMembersService.addRaidTeamMember(
       this.raidTeamId,
       this.name,
-      this.server).subscribe(observer => {
-        this.teamManagerService.announceTeamMemberCreated({name: this.name, server: this.server});
-        this.name = "";
-        this.server = "";
+      this.server).subscribe(addTeamMemberResponse => {
+        const extendedInfoSocket = webSocket<any>(addTeamMemberResponse.webSocketUrl).subscribe(
+          _ => {
+          this.teamManagerService.announceTeamMemberCreated({name: this.name, server: this.server});
+          this.name = "";
+          this.server = "";
+          extendedInfoSocket.unsubscribe();
+        });
       });
   }
 }

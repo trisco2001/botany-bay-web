@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BlizzyAuthService } from './core/services/blizzy-auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,5 +15,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'botany-bay-web';
 
-  constructor() {}
+  constructor(private blizzyAuthService: BlizzyAuthService) {}
+
+  ngOnInit() {
+    this.blizzyAuthService.refreshToken();
+  }
 }

@@ -18,6 +18,7 @@ interface AllTeamMembersResponse {
 
 interface AddTeamMemberResponse {
   id: string;
+  webSocketUrl: string;
 }
 
 @Injectable({

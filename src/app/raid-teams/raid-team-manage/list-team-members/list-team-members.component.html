@@ -15,6 +15,7 @@
                         <div class="card-content">
                             <h1>{{ teamMember.name }}</h1>
                             <h3>{{ teamMember.server }}</h3>
+                            <h3 *ngIf="teamMember.characterData">{{ teamMember.characterData.items.averageItemLevelEquipped }}</h3>
                         </div>
                     </a>
                 </div>
