@@ -10,13 +10,13 @@ import { TeamManagerService } from '../services/team-manager.service';
 export class ListTeamMembersComponent implements OnInit {
   @Input("raidTeamId") raidTeamId: string;
 
-  teamMembers;
+  teamMembers: Array<{name: string}>;
 
   constructor(
     private teamMemberService: TeamMembersService,
     teamManagerService: TeamManagerService) {
       teamManagerService.teamMemberCreated.subscribe(teamMember => {
-        this.refreshTeamList();
+        this.teamMembers = this.teamMembers.concat([teamMember]).sort((a, b) => a.name.localeCompare(b.name));
       });
      }
 

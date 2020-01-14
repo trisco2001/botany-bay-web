@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 interface TeamMember {
+  id: string;
+  raidTeamId: string;
   name: string;
   server: string;
+  characterData: any;
 }
 
 @Injectable({

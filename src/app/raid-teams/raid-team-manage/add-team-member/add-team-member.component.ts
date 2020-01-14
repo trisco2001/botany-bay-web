@@ -4,6 +4,14 @@ import { TeamManagerService } from '../services/team-manager.service';
 
 import { webSocket, WebSocketSubject} from 'rxjs/webSocket';
 
+interface WebSocketResponse {
+  raidTeamId: string;
+  id: string;
+  server: string;
+  name: string;
+  characterData: any;
+}
+
 @Component({
   selector: 'app-add-team-member',
   templateUrl: './add-team-member.component.html',
@@ -25,11 +33,11 @@ export class AddTeamMemberComponent implements OnInit {
       this.raidTeamId,
       this.name,
       this.server).subscribe(addTeamMemberResponse => {
-        const extendedInfoSocket = webSocket<any>(addTeamMemberResponse.webSocketUrl).subscribe(
-          _ => {
-          this.teamManagerService.announceTeamMemberCreated({name: this.name, server: this.server});
-          this.name = "";
-          this.server = "";
+        this.name = "";
+
+        const extendedInfoSocket = webSocket<WebSocketResponse>(addTeamMemberResponse.webSocketUrl).subscribe(
+          webSocketResponse => {
+          this.teamManagerService.announceTeamMemberCreated(webSocketResponse);
           extendedInfoSocket.unsubscribe();
         });
       });
