@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContactComponent } from './contact.component';
+import { RaidTeamChartComponent } from './raid-team-chart.component';
 
-describe('ContactComponent', () => {
-  let component: ContactComponent;
-  let fixture: ComponentFixture<ContactComponent>;
+describe('RaidTeamChartComponent', () => {
+  let component: RaidTeamChartComponent;
+  let fixture: ComponentFixture<RaidTeamChartComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContactComponent ]
+      declarations: [ RaidTeamChartComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContactComponent);
+    fixture = TestBed.createComponent(RaidTeamChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
