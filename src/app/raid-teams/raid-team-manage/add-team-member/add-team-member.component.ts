@@ -34,7 +34,7 @@ export class AddTeamMemberComponent implements OnInit {
       this.name,
       this.server).subscribe(addTeamMemberResponse => {
         this.name = "";
-
+        console.log(addTeamMemberResponse);
         const extendedInfoSocket = webSocket<WebSocketResponse>(addTeamMemberResponse.webSocketUrl).subscribe(
           webSocketResponse => {
           this.teamManagerService.announceTeamMemberCreated(webSocketResponse);

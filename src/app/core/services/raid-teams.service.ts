@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 interface RaidTeam {
   name: string;
@@ -23,7 +24,7 @@ interface CreateRaidTeamResponse {
   providedIn: 'root'
 })
 export class RaidTeamsService {
-  apiUrl = "http://localhost:3000/raid-teams";
+  apiUrl = `${environment.apiUrl}/raid-teams`;
 
   constructor(private httpClient: HttpClient) { }
 

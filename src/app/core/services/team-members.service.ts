@@ -27,7 +27,7 @@ interface AddTeamMemberResponse {
   providedIn: 'root'
 })
 export class TeamMembersService {
-  apiUrl = "http://localhost:3000/raid-teams";
+  apiUrl = "https://ddve24bdm8.execute-api.us-west-2.amazonaws.com/dev/raid-teams";
 
   constructor(private httpClient: HttpClient) { }
 
