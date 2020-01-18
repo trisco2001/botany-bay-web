@@ -6,6 +6,10 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
+jspm_packages
+
+# Serverless directories
+.serverless
 
 # dependencies
 /node_modules

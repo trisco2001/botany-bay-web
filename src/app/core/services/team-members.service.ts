@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 interface TeamMember {
   name: string;
@@ -27,7 +28,7 @@ interface AddTeamMemberResponse {
   providedIn: 'root'
 })
 export class TeamMembersService {
-  apiUrl = "https://ddve24bdm8.execute-api.us-west-2.amazonaws.com/dev/raid-teams";
+  apiUrl = `${environment.apiUrl}/raid-teams`;
 
   constructor(private httpClient: HttpClient) { }
 
