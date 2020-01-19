@@ -23,7 +23,7 @@
         <div class="columns is-multiline" *ngIf="raidTeams">
             <div class="column is-4" *ngFor="let raidTeam of raidTeams">
                 <div class="card">
-                    <a routerLink="/raid-teams/{{raidTeam.id}}">
+                    <a routerLink="/raid-teams/{{raidTeam.friendlyId}}">
                         <div class="card-content">
                             <h1>{{ raidTeam.name }}</h1>
                             <h3>{{ raidTeam.server }}</h3>

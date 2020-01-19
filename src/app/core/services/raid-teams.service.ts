@@ -7,6 +7,7 @@ interface RaidTeam {
   server: string;
   createdAt: number;
   id: string;
+  friendlyId: string;
   updatedAt: string;
 }
 
@@ -32,12 +33,17 @@ export class RaidTeamsService {
     return this.httpClient.get<AllRaidTeamsResponse>(`${this.apiUrl}`);
   }
 
-  getSingleRaidTeam(id: string) {
-    return this.httpClient.get<RaidTeam>(`${this.apiUrl}/${id}`);
+  getRaidTeamByFriendlyId(friendlyId: string) {
+    return this.httpClient.get<RaidTeam>(`${this.apiUrl}?friendlyId=${friendlyId}`);
   }
 
-  createRaidTeam(name: string, server: string) {
-    return this.httpClient.post<CreateRaidTeamResponse>(`${this.apiUrl}`, { name: name, server: server });
+  createRaidTeam(name: string, server: string, friendlyId: string) {
+    return this.httpClient.post<CreateRaidTeamResponse>(`${this.apiUrl}`,
+      {
+        name: name,
+        server: server,
+        friendlyId: friendlyId
+      });
   }
 
 }

@@ -11,8 +11,8 @@ const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'raid-teams/new', component: RaidTeamCreateComponent},
   {path: 'raid-teams', component: RaidTeamListComponent},
-  {path: 'raid-teams/:id', component: RaidTeamViewComponent},
-  {path: 'raid-teams/:id/manage', component: RaidTeamManageComponent}
+  {path: 'raid-teams/:friendlyId', component: RaidTeamViewComponent},
+  {path: 'raid-teams/:friendlyId/manage', component: RaidTeamManageComponent}
 ];
 
 @NgModule({

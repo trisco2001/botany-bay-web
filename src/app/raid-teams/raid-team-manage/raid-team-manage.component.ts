@@ -17,9 +17,9 @@ export class RaidTeamManageComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const id = params['id'];
+      const friendlyId = params['friendlyId'];
 
-      this.raidTeamsService.getSingleRaidTeam(id)
+      this.raidTeamsService.getRaidTeamByFriendlyId(friendlyId)
         .subscribe(raidTeam => {
           this.raidTeam = raidTeam;
         });

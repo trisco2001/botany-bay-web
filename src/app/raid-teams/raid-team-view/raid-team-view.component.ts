@@ -36,6 +36,7 @@ interface RaidTeam {
   server: string;
   createdAt: number;
   id: string;
+  friendlyId: string;
   updatedAt: string;
 }
 
@@ -56,9 +57,9 @@ export class RaidTeamViewComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const id = params['id'];
+      const friendlyId = params['friendlyId'];
 
-      this.raidTeamsService.getSingleRaidTeam(id)
+      this.raidTeamsService.getRaidTeamByFriendlyId(friendlyId)
         .subscribe(raidTeam => {
           this.raidTeam = raidTeam;
           this.teamMembersService.getAllTeamMembers(this.raidTeam.id).subscribe(allTeamMembers => {
@@ -86,7 +87,7 @@ export class RaidTeamViewComponent implements OnInit {
   }
 
   navigateToManage() {
-    this.router.navigate(['raid-teams', this.raidTeam.id, 'manage'] );
+    this.router.navigate(['raid-teams', this.raidTeam.friendlyId, 'manage'] );
   }
 
   getRoleDescriptions(role?: string): { description: string; name: string; icon: string; } {
