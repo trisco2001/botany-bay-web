@@ -3,12 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RaidTeamsService } from 'src/app/core/services/raid-teams.service';
 import { TeamMembersService, AllTeamMembersResponse } from 'src/app/core/services/team-members.service';
 import { isNullOrUndefined } from 'util';
+import { ClassService } from 'src/app/core/services/class.service';
 
 interface TeamMember {
   name: string;
   server: string;
   id: string;
   characterData?: any;
+  className: string;
+  color: string;
 }
 
 interface Role {
@@ -33,6 +36,7 @@ interface RaidTeam {
   server: string;
   createdAt: number;
   id: string;
+  friendlyId: string;
   updatedAt: string;
 }
 
@@ -48,13 +52,14 @@ export class RaidTeamViewComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private raidTeamsService: RaidTeamsService,
-    private teamMembersService: TeamMembersService) { }
+    private teamMembersService: TeamMembersService,
+    private classService: ClassService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const id = params['id'];
+      const friendlyId = params['friendlyId'];
 
-      this.raidTeamsService.getSingleRaidTeam(id)
+      this.raidTeamsService.getRaidTeamByFriendlyId(friendlyId)
         .subscribe(raidTeam => {
           this.raidTeam = raidTeam;
           this.teamMembersService.getAllTeamMembers(this.raidTeam.id).subscribe(allTeamMembers => {
@@ -82,7 +87,7 @@ export class RaidTeamViewComponent implements OnInit {
   }
 
   navigateToManage() {
-    this.router.navigate(['raid-teams', this.raidTeam.id, 'manage'] );
+    this.router.navigate(['raid-teams', this.raidTeam.friendlyId, 'manage'] );
   }
 
   getRoleDescriptions(role?: string): { description: string; name: string; icon: string; } {
@@ -101,10 +106,21 @@ export class RaidTeamViewComponent implements OnInit {
   }
 
   private membersMatchingRole(allTeamMembers: AllTeamMembersResponse, role?: string) {
+    const convertedTeamMembers = allTeamMembers.Items.map(rawMember => {
+      return {
+        name: rawMember.name,
+        server: rawMember.server,
+        id: rawMember.id,
+        role: rawMember.role,
+        characterData: rawMember.characterData,
+        className: this.classService.classes[rawMember.characterData.class].name,
+        color: this.classService.classes[rawMember.characterData.class].color
+      }
+    });
     if (!role) {
-      return allTeamMembers.Items.filter(i => isNullOrUndefined(i.role));
+      return convertedTeamMembers.filter(i => isNullOrUndefined(i.role));
     } else {
-      return allTeamMembers.Items.filter(i => i.role === role);
+      return convertedTeamMembers.filter(i => i.role === role);
     }
   }
 }

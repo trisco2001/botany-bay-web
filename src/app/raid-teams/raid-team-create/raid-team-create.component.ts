@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class RaidTeamCreateComponent implements OnInit {
   name: string;
   server: string;
+  friendlyId: string;
   enabled = true;
 
   constructor(private raidTeamsService: RaidTeamsService,
@@ -20,10 +21,10 @@ export class RaidTeamCreateComponent implements OnInit {
 
   submitForm() {
     this.enabled = false;
-    this.raidTeamsService.createRaidTeam(this.name, this.server)
+    this.raidTeamsService.createRaidTeam(this.name, this.server, this.friendlyId)
       .subscribe(observer => {
         this.enabled = true;
-        this.router.navigate(['raid-teams', observer.id, 'manage'])
+        this.router.navigate(['raid-teams', this.friendlyId, 'manage'])
       });
   }
 }

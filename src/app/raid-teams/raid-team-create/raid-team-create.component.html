@@ -41,6 +41,22 @@
                 </div>
             </div>
 
+            <!-- name -->
+            <div class="field">
+                <label class="label">Friendly ID</label>
+                <input
+                    type="text"
+                    name="friendlyId"
+                    class="input"
+                    [(ngModel)]="friendlyId" 
+                    #friendlyIdInput="ngModel"
+                    required
+                    />
+                <div class="help is-error" *ngIf="friendlyIdInput.invalid && (friendlyIdInput.dirty || friendlyIdInput.touched)">
+                    A URL-friendly ID for your team. Only letters and dashes please! For example "botany-bay-aotc"
+                </div>
+            </div>
+
             <!-- submit button -->
             <button
                 type="submit"
