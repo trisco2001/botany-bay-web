@@ -1,0 +1,20 @@
+<section class="hero is-dark">
+    <div class="card has-background-dark">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-96x96">
+                        <img src="{{avatarImageUrl}}" alt="Character avatar">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4">{{teamMember.name}}</p>
+                    <p class="subtitle is-6">
+                        {{teamMember.server}}
+                    </p>
+                    <a routerLink="/raid-teams/{{raidTeam.friendlyId}}">{{raidTeam.name}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

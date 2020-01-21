@@ -20,6 +20,8 @@ custom:
   client:
     bucketName: botanybayweb.com
     distributionFolder: dist/botany-bay-web
+    indexDocument: index.html
+    errorDocument: index.html
 
 provider:
   name: aws

@@ -14,6 +14,10 @@ import { ListTeamMembersComponent } from './raid-teams/raid-team-manage/list-tea
 import { RaidTeamViewComponent } from './raid-teams/raid-team-view/raid-team-view.component';
 import { ChartsModule } from 'ng2-charts';
 import { RaidTeamChartComponent } from './raid-teams/raid-team-view/raid-team-chart/raid-team-chart.component';
+import { TeamMemberViewComponent } from './team-members/team-member-view/team-member-view.component';
+import { CharacterHeaderComponent } from './team-members/team-member-view/character-header/character-header.component';
+import { CharacterInfoComponent } from './team-members/team-member-view/character-info/character-info.component';
+import { CharacterMetricsComponent } from './team-members/team-member-view/character-metrics/character-metrics.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { RaidTeamChartComponent } from './raid-teams/raid-team-view/raid-team-ch
     AddTeamMemberComponent,
     ListTeamMembersComponent,
     RaidTeamViewComponent,
-    RaidTeamChartComponent
+    RaidTeamChartComponent,
+    TeamMemberViewComponent,
+    CharacterHeaderComponent,
+    CharacterInfoComponent,
+    CharacterMetricsComponent
   ],
   imports: [
     BrowserModule,

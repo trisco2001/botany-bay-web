@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
-interface TeamMember {
+export interface TeamMember {
   name: string;
   server: string;
   raidTeamId: string;
@@ -37,7 +37,7 @@ export class TeamMembersService {
   }
 
   getSingleTeamMember(raidTeamId: string, id: string) {
-    return this.httpClient.get<AddTeamMemberResponse>(`${this.apiUrl}/${raidTeamId}/team-members/${id}`);
+    return this.httpClient.get<TeamMember>(`${this.apiUrl}/${raidTeamId}/team-members/${id}`);
   }
 
   addRaidTeamMember(raidTeamId: string, name: string, server: string) {
