@@ -4,6 +4,7 @@ import { RaidTeamsService } from 'src/app/core/services/raid-teams.service';
 import { TeamMembersService, AllTeamMembersResponse } from 'src/app/core/services/team-members.service';
 import { isNullOrUndefined } from 'util';
 import { ClassService } from 'src/app/core/services/class.service';
+import { RolesService } from 'src/app/core/services/roles.service';
 
 interface TeamMember {
   name: string;
@@ -53,7 +54,8 @@ export class RaidTeamViewComponent implements OnInit {
     private router: Router,
     private raidTeamsService: RaidTeamsService,
     private teamMembersService: TeamMembersService,
-    private classService: ClassService) { }
+    private classService: ClassService,
+    private rolesService: RolesService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -78,31 +80,16 @@ export class RaidTeamViewComponent implements OnInit {
   private statsForRole(allTeamMembers: AllTeamMembersResponse, role?: string) {
     const members = this.membersMatchingRole(allTeamMembers, role);
     const membersWithItemLevel = members.filter(t => t.characterData && t.characterData.items && t.characterData.items.averageItemLevelEquipped);
-    const {description, name, icon} = this.getRoleDescriptions(role);
+    const roleInfo = this.rolesService.roles[role || "unset"];
     if (membersWithItemLevel.length === 0) {
-      return { averageItemLevel: NaN, count: members.length, members, description, name, icon };
+      return { averageItemLevel: NaN, count: members.length, members, description: roleInfo.description, name: roleInfo.name, icon: roleInfo.icon };
     }
     const averageItemLevel = membersWithItemLevel.map(t => t.characterData.items.averageItemLevelEquipped).reduce((prev, current) => prev + current) / membersWithItemLevel.length;
-    return { averageItemLevel, count: members.length, members, description, name, icon };
+    return { averageItemLevel, count: members.length, members, description: roleInfo.description, name: roleInfo.name, icon: roleInfo.icon };
   }
 
   navigateToManage() {
     this.router.navigate(['raid-teams', this.raidTeam.friendlyId, 'manage'] );
-  }
-
-  getRoleDescriptions(role?: string): { description: string; name: string; icon: string; } {
-    switch(role) {
-      case "tank":
-        return {description: "The punching bags", name: "Tanks", icon: "fa-shield-alt"};
-      case "healer":
-        return {description: "Mistake insurance", name: "Healers", icon: "fa-plus-square"};
-      case "rdps":
-        return {description: "Afraid of knives", name: "Ranged DPS", icon: "fa-fire"};
-      case "mdps":
-        return {description: "Shanky-danks!", name: "Melee DPS", icon: "fa-hammer"};
-      default:
-        return {description: "The indecisive", name: "No Role", icon: "fa-question-circle"};
-    }
   }
 
   private membersMatchingRole(allTeamMembers: AllTeamMembersResponse, role?: string) {

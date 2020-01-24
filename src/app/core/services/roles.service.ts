@@ -9,16 +9,29 @@ export class RolesService {
 
   roles = {
     mdps: {
-      name: "Melee DPS"
+      name: "Melee DPS",
+      description: "Shanky-danks!",
+      icon: "fa-hammer"
     },
     rdps: {
-      name: "Ranged DPS"
+      name: "Ranged DPS",
+      description: "Afraid of knives",
+      icon: "fa-fire"
     },
     tank: {
-      name: "Tank"
+      name: "Tank",
+      description: "The punching bags",
+      icon: "fa-shield-alt"
     },
     healer: {
-      name: "Healer"
+      name: "Healer",
+      description: "Mistake insurance",
+      icon: "fa-plus-square"
+    },
+    unset: {
+      name: "No Role",
+      description: "The indecisive",
+      icon: "fa-question-circle"
     }
   }
 }

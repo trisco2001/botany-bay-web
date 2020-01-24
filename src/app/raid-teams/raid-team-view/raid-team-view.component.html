@@ -4,7 +4,7 @@
         <button class="button" (click)="navigateToManage()">Manage</button>
 
         <div *ngFor="let role of [roster.tanks, roster.healers, roster.rdps, roster.mdps, roster.unset]">
-            <div class="card" *ngIf="role.members.length > 0">
+            <div class="card" *ngIf="role && role.members.length > 0">
                 <div class="card-content">
                     <div class="media">
                         <div class="media-left">

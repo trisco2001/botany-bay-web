@@ -18,6 +18,7 @@ export class AppComponent {
   constructor(private blizzyAuthService: BlizzyAuthService) {}
 
   ngOnInit() {
-    this.blizzyAuthService.refreshToken();
+    // Commenting out for now; not needed yet.
+    // this.blizzyAuthService.refreshToken();
   }
 }
