@@ -27,9 +27,13 @@ export class TeamMemberViewComponent implements OnInit {
 
       this.raidTeamsService.getRaidTeamByFriendlyId(friendlyId)
         .subscribe(raidTeam => {
+          console.log("raid team loaded");
+          console.log(`${JSON.stringify(raidTeam)}`);
           this.raidTeam = raidTeam;
           this.teamMemberService.getSingleTeamMember(raidTeam.id, `${raidTeam.id}-${server}-${name}`).subscribe(teamMember => {
             this.teamMember = teamMember;
+            console.log("team member loaded");
+            console.log(`${JSON.stringify(teamMember)}`);
             if (teamMember.characterData && teamMember.characterData.thumbnail) {
               this.avatarImageUrl = "http://render-us.worldofwarcraft.com/character/" + teamMember.characterData.thumbnail;
               this.backgroundImageUrl = this.avatarImageUrl.replace("-avatar.jpg", "-main.jpg");

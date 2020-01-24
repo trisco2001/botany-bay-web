@@ -30,7 +30,8 @@ export class CharacterInfoComponent implements OnInit, OnChanges {
     if (this.teamMember) {
       this.className = this.classService.classes[this.teamMember.characterData.class].name;
       this.averageItemLevel = this.itemLevelsService.calculateItemLevel(this.teamMember.characterData);
-      this.roleName = this.rolesService.roles[this.teamMember.role].name;
+      const role = this.teamMember.role || "unset";
+      this.roleName = this.rolesService.roles[role].name;
     }
   }
 
