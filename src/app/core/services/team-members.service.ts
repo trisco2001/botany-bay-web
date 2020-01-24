@@ -19,6 +19,18 @@ export interface AllTeamMembersResponse {
   ScannedCount: number;
 }
 
+export interface TeamMemberMetric {
+  raidTeamMemberId: string;
+  timestamp: number;
+  averageItemLevel: number;
+}
+
+export interface TeamMemberMetricsResponse {
+  Items: TeamMemberMetric[];
+  Count: number;
+  ScannedCount: number;
+}
+
 interface AddTeamMemberResponse {
   id: string;
   webSocketUrl: string;
@@ -38,6 +50,10 @@ export class TeamMembersService {
 
   getSingleTeamMember(raidTeamId: string, id: string) {
     return this.httpClient.get<TeamMember>(`${this.apiUrl}/${raidTeamId}/team-members/${id}`);
+  }
+
+  getSingleTeamMemberMetrics(raidTeamId: string, id: string) {
+    return this.httpClient.get<TeamMemberMetricsResponse>(`${this.apiUrl}/${raidTeamId}/team-members/${id}/metrics`);
   }
 
   addRaidTeamMember(raidTeamId: string, name: string, server: string) {

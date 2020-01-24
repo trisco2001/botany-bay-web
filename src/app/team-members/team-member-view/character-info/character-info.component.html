@@ -1,30 +1,20 @@
 <section class="section">
     <div class="container">
-        <h2 class="title has-text-centered">PiperNet Setup</h2>
+        <h2 class="title has-text-centered">{{teamMember.name}} - {{teamMember.server}}</h2>
         <div class="columns is-vcentered">
             <div class="column">
-                <h2 class="title is-spaced">How to start</h2>
-                <p class="subtitle">Let's get you connected! We've designed a simple, efficient process for companies
-                    migrating to PiperNet. Here's how it works.</p><a class="button is-primary" href="#">Start
-                    Setup!</a>
+                <h2 class="title is-spaced">Role</h2>
+                <p class="subtitle">{{roleName}}</p>
+                <hr>
+                <h2 class="title is-spaced">Class</h2>
+                <p class="subtitle">{{className}}</p>
+                <hr>
+                <h2 class="title is-spaced">Item Level</h2>
+                <p class="subtitle">{{averageItemLevel | number : '1.1-1'}}</p>
             </div>
             <div class="column"><img src="{{backgroundImageUrl}}" alt="Character backdrop">
             </div>
         </div>
         <hr>
-        <div class="level">
-            <div class="level-item">
-                <div class="number has-background-primary">1</div>
-                <h4 class="title is-4">Move</h4>
-            </div>
-            <div class="level-item">
-                <div class="number">2</div>
-                <h4 class="title is-4">Integrate</h4>
-            </div>
-            <div class="level-item">
-                <div class="number">3</div>
-                <h4 class="title is-4">Support</h4>
-            </div>
-        </div>
     </div>
 </section>

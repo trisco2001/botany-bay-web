@@ -1,19 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { TeamMember, TeamMembersService } from 'src/app/core/services/team-members.service';
 
 @Component({
   selector: 'app-character-metrics',
   templateUrl: './character-metrics.component.html',
   styleUrls: ['./character-metrics.component.scss']
 })
-export class CharacterMetricsComponent implements OnInit {
-
+export class CharacterMetricsComponent implements OnInit, OnChanges {
+  @Input() teamMember: TeamMember;
 
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{}] },
+    scales: { xAxes: [{
+      type: 'time', 
+      time: {
+        unit: 'day',
+        unitStepSize: 1,
+        displayFormats: {
+           'day': 'MMM DD'
+        }
+      }
+    }], yAxes: [{}] },
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -21,8 +31,8 @@ export class CharacterMetricsComponent implements OnInit {
       }
     }
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: ChartType = 'bar';
+  public barChartLabels: Label[] = [];
+  public barChartType: ChartType = 'line';
   public barChartLegend = true;
 
   public barChartData: ChartDataSets[] = [
@@ -30,9 +40,29 @@ export class CharacterMetricsComponent implements OnInit {
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
   
-  constructor() { }
+  constructor(private teamMembersService: TeamMembersService) { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges() {
+    this.teamMembersService.getSingleTeamMemberMetrics(this.teamMember.raidTeamId, this.teamMember.id).subscribe(teamMemberMetrics => {
+      this.barChartData = [
+        {
+          data: teamMemberMetrics.Items.map(metric => {
+            return {
+              x: new Date(metric.timestamp), 
+              y: metric.averageItemLevel
+            };
+          }),
+          label: "Item Level"
+        }
+      ]
+
+      console.log("Bar chart data");
+      console.log(JSON.stringify(teamMemberMetrics));
+      console.log(JSON.stringify(this.barChartData));
+    });
   }
 
 }
