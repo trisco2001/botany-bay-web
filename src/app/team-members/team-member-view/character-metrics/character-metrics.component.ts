@@ -60,8 +60,6 @@ export class CharacterMetricsComponent implements OnInit, OnChanges {
       ]
 
       console.log("Bar chart data");
-      console.log(JSON.stringify(teamMemberMetrics));
-      console.log(JSON.stringify(this.barChartData));
     });
   }
 

@@ -3,6 +3,11 @@
         <h2 class="title has-text-centered">{{teamMember.name}} - {{teamMember.server}}</h2>
         <div class="columns is-vcentered">
             <div class="column">
+                <h2 class="title is-spaced">Team</h2>
+                <a routerLink="/raid-teams/{{raidTeam.friendlyId}}">
+                    <p class="subtitle">{{raidTeam.name}}</p>
+                </a>
+                <hr>
                 <h2 class="title is-spaced">Role</h2>
                 <p class="subtitle">{{roleName}}</p>
                 <hr>
@@ -15,6 +20,5 @@
             <div class="column"><img src="{{backgroundImageUrl}}" alt="Character backdrop">
             </div>
         </div>
-        <hr>
     </div>
 </section>

@@ -33,10 +33,10 @@ export class ItemLevelService {
     ];
 
     const itemsPresentOnCharacter = itemsThatCount.filter(item => {
-      return !isNullOrUndefined(characterData.items[item]);
+      return item in characterData.items;
     });
 
-    const itemLevelsForItemsPresentOnCharacter = itemsThatCount.map(item => {
+    const itemLevelsForItemsPresentOnCharacter = itemsPresentOnCharacter.map(item => {
       return characterData.items[item].itemLevel;
     });
 
