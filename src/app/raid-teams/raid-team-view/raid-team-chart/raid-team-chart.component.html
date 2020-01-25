@@ -11,3 +11,13 @@
         </div>
     </div>
 </div>
+<section class="section is-hcentered">
+    <div class="columns">
+        <div class="column is-4">
+            <button [className]="selectedStats == 'all' ? 'button is-active' : 'button '" (click)="select('all')">All</button>
+            <button [className]="selectedStats == 'gear' ? 'button is-active' : 'button '" (click)="select('gear')">Gear</button>
+            <button [className]="selectedStats == 'heart' ? 'button is-active' : 'button '" (click)="select('heart')">Heart</button>
+            <button [className]="selectedStats == 'cloak' ? 'button is-active' : 'button '" (click)="select('cloak')">Cloak</button>
+        </div>
+    </div>
+</section>

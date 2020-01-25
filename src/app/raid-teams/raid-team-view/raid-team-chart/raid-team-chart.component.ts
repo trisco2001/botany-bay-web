@@ -26,13 +26,18 @@ interface Roster {
   unset: Role;
 }
 
+const legendaryCloakId = 169223;
+
 @Component({
   selector: 'app-raid-team-chart',
   templateUrl: './raid-team-chart.component.html',
   styleUrls: ['./raid-team-chart.component.scss']
 })
 export class RaidTeamChartComponent implements OnInit, OnChanges {
+
   @Input() roster: Roster;
+
+  selectedStats: "all" | "gear" | "heart" | "cloak" = "all";
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -60,21 +65,67 @@ export class RaidTeamChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const barChartMembers = this.roster.healers.members
+    if (changes.roster) {
+      const barChartMembers = this.convertRosterToMembers()
+      this.refreshBarChart(barChartMembers);
+    }
+  }
+
+  private refreshBarChart(barChartMembers: TeamMember[]) {
+    this.barChartData = this.calculateChartData(barChartMembers);
+    this.barChartLabels = barChartMembers.map(m => m.name);
+  }
+
+  private convertRosterToMembers() {
+    return this.roster.healers.members
       .concat(this.roster.tanks.members)
       .concat(this.roster.rdps.members)
       .concat(this.roster.mdps.members)
       .concat(this.roster.unset.members)
-      .sort((a, b) => b.characterData.items.averageItemLevelEquipped - a.characterData.items.averageItemLevelEquipped)
-    console.log("Bar Chart Members");
-    console.log(barChartMembers);
-    this.barChartData = [
-      {data: barChartMembers.map(m => m.characterData.items.averageItemLevelEquipped), label: 'Item Level'},
-      {data: barChartMembers.map(m => m.characterData.items.neck.itemLevel), label: 'Heart Belief'}
-    ];
-    this.barChartLabels = barChartMembers.map(m => m.name);
+      .sort((a, b) => b.characterData.items.averageItemLevelEquipped - a.characterData.items.averageItemLevelEquipped);
   }
 
-  ngOn
+  private calculateChartData(barChartMembers: TeamMember[]): ChartDataSets[] {
+    return [
+      { data: this.calculateItemLevelData(barChartMembers), label: 'Item Level' },
+      { data: this.calculateNeckData(barChartMembers), label: 'Heart Belief' },
+      { data: this.calculateCloakData(barChartMembers), label: 'Back Support'}
+    ].filter(dataSet => dataSet.data != null)
+  }
+
+  private calculateItemLevelData(barChartMembers: TeamMember[]) {
+    if (this.selectedStats != "all" && this.selectedStats != "gear") {
+      return null;
+    }
+    return barChartMembers.map(m => m.characterData.items.averageItemLevelEquipped);
+  }
+
+  private calculateNeckData(barChartMembers: TeamMember[]) {
+    if (this.selectedStats != "all" && this.selectedStats != "heart") {
+      return null;
+    }
+    return barChartMembers.map(m => m.characterData.items.neck.itemLevel);
+  }
+
+  private calculateCloakData(barChartMembers: TeamMember[]) {
+    if (this.selectedStats != "all" && this.selectedStats != "cloak") {
+      return null;
+    }
+
+    return barChartMembers.map(m => {
+      if (m.characterData.items.back && m.characterData.items.back.id === legendaryCloakId) {
+        return m.characterData.items.back.itemLevel;
+      }
+      else {
+        return null;
+      }
+    });
+  }
+
+  select(itemType: "all" | "gear" | "heart" | "cloak") {
+    this.selectedStats = itemType;
+    const barChartMembers = this.convertRosterToMembers()
+    this.refreshBarChart(barChartMembers);
+  }
 
 }
