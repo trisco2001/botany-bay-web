@@ -98,8 +98,7 @@ export class RaidTeamOverTimeChartComponent implements OnInit, OnChanges {
     }).filter(item => item !== null);
   }
 
-  select(itemType: "all" | "tank" | "healer" | "dps") {
-    console.log(`Setting role to ${itemType}`);
+  select(itemType: "all" | "tank" | "healer" | "rdps" | "mdps" | "none") {
     this.selectedRole = itemType;
     this.refreshChartData(this.teamMetrics);
   }
