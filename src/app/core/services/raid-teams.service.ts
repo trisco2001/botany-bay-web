@@ -17,6 +17,19 @@ interface AllRaidTeamsResponse {
   ScannedCount: number;
 }
 
+interface RaidTeamMetric {
+  raidTeamMemberId: string;
+  raidTeamId: string;
+  timestamp: number;
+  averageItemLevel: number;
+}
+
+export interface RaidTeamMetricsResponse {
+  Items: RaidTeamMetric[];
+  Count: number;
+  ScannedCount: number;
+}
+
 interface CreateRaidTeamResponse {
   id: string;
 }
@@ -35,6 +48,10 @@ export class RaidTeamsService {
 
   getRaidTeamByFriendlyId(friendlyId: string) {
     return this.httpClient.get<RaidTeam>(`${this.apiUrl}?friendlyId=${friendlyId}`);
+  }
+
+  getTeamMetrics(raidTeamId: string) {
+    return this.httpClient.get<RaidTeamMetricsResponse>(`${this.apiUrl}/${raidTeamId}/metrics`);
   }
 
   createRaidTeam(name: string, server: string, friendlyId: string) {

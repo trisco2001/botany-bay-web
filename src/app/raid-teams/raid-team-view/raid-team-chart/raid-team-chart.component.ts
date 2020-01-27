@@ -87,31 +87,21 @@ export class RaidTeamChartComponent implements OnInit, OnChanges {
 
   private calculateChartData(barChartMembers: TeamMember[]): ChartDataSets[] {
     return [
-      { data: this.calculateItemLevelData(barChartMembers), label: 'Item Level' },
-      { data: this.calculateNeckData(barChartMembers), label: 'Heart Belief' },
-      { data: this.calculateCloakData(barChartMembers), label: 'Back Support'}
+      { data: this.calculateItemLevelData(barChartMembers), label: 'Item Level', hidden: this.selectedStats != "all" && this.selectedStats != "gear" },
+      { data: this.calculateNeckData(barChartMembers), label: 'Heart Belief', hidden: this.selectedStats != "all" && this.selectedStats != "heart" },
+      { data: this.calculateCloakData(barChartMembers), label: 'Back Support', hidden: this.selectedStats != "all" && this.selectedStats != "cloak"}
     ].filter(dataSet => dataSet.data != null)
   }
 
   private calculateItemLevelData(barChartMembers: TeamMember[]) {
-    if (this.selectedStats != "all" && this.selectedStats != "gear") {
-      return null;
-    }
     return barChartMembers.map(m => m.characterData.items.averageItemLevelEquipped);
   }
 
   private calculateNeckData(barChartMembers: TeamMember[]) {
-    if (this.selectedStats != "all" && this.selectedStats != "heart") {
-      return null;
-    }
     return barChartMembers.map(m => m.characterData.items.neck.itemLevel);
   }
 
   private calculateCloakData(barChartMembers: TeamMember[]) {
-    if (this.selectedStats != "all" && this.selectedStats != "cloak") {
-      return null;
-    }
-
     return barChartMembers.map(m => {
       if (m.characterData.items.back && m.characterData.items.back.id === legendaryCloakId) {
         return m.characterData.items.back.itemLevel;

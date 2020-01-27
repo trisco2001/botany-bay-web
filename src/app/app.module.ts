@@ -18,6 +18,7 @@ import { TeamMemberViewComponent } from './team-members/team-member-view/team-me
 import { CharacterHeaderComponent } from './team-members/team-member-view/character-header/character-header.component';
 import { CharacterInfoComponent } from './team-members/team-member-view/character-info/character-info.component';
 import { CharacterMetricsComponent } from './team-members/team-member-view/character-metrics/character-metrics.component';
+import { RaidTeamOverTimeChartComponent } from './raid-teams/raid-team-view/raid-team-over-time-chart/raid-team-over-time-chart.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CharacterMetricsComponent } from './team-members/team-member-view/chara
     TeamMemberViewComponent,
     CharacterHeaderComponent,
     CharacterInfoComponent,
-    CharacterMetricsComponent
+    CharacterMetricsComponent,
+    RaidTeamOverTimeChartComponent
   ],
   imports: [
     BrowserModule,

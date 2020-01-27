@@ -1,0 +1,30 @@
+<section class="section">
+    <div class="container has-text-centered">
+        <h2 class="title">Average Item Level over Time</h2>
+        <div class="columns">
+            <div class="column">
+                <button [className]="selectedRole == 'all' ? 'button is-active' : 'button '" (click)="select('all')">All</button>
+                <button [className]="selectedRole == 'none' ? 'button is-active' : 'button '" (click)="select('none')">None</button>
+                <button [className]="selectedRole == 'tank' ? 'button is-active' : 'button '" (click)="select('tank')">Tanks</button>
+                <button [className]="selectedRole == 'healer' ? 'button is-active' : 'button '" (click)="select('healer')">Healers</button>
+                <button [className]="selectedRole == 'mdps' ? 'button is-active' : 'button '" (click)="select('mdps')">Melee</button>
+                <button [className]="selectedRole == 'rdps' ? 'button is-active' : 'button '" (click)="select('rdps')">Ranged</button>
+            </div>
+        </div>
+        <div class="block" style="background-color: #111111;">
+            <div>
+                <div>
+                    <div style="display: block">
+                    <canvas baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [options]="barChartOptions"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType">
+                    </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

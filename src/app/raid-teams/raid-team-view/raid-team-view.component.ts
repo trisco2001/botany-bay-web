@@ -49,6 +49,7 @@ interface RaidTeam {
 export class RaidTeamViewComponent implements OnInit {
   raidTeam: RaidTeam;
   roster: Roster;
+  allTeamMembers;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -65,6 +66,7 @@ export class RaidTeamViewComponent implements OnInit {
         .subscribe(raidTeam => {
           this.raidTeam = raidTeam;
           this.teamMembersService.getAllTeamMembers(this.raidTeam.id).subscribe(allTeamMembers => {
+            this.allTeamMembers = allTeamMembers;
             this.roster = {
               tanks: this.statsForRole(allTeamMembers, "tank"),
               healers: this.statsForRole(allTeamMembers, "healer"),
