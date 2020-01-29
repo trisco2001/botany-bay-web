@@ -3,9 +3,9 @@
         <h1 class="title">{{raidTeam.name}}</h1>
         <button class="button" (click)="navigateToManage()">Manage</button>
 
-        <app-raid-team-info [roster]="roster" [raidTeam]="raidTeam"></app-raid-team-info>
-
         <app-raid-team-members [roster]="roster" [raidTeam]="raidTeam"></app-raid-team-members>
+
+        <app-raid-team-info [roster]="roster" [raidTeam]="raidTeam"></app-raid-team-info>
 
         <app-raid-team-chart [roster]="roster"></app-raid-team-chart>
 
