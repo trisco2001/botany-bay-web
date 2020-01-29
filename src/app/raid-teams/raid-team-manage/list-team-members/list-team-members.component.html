@@ -31,22 +31,23 @@
                         
                             <div class="tabs is-toggle is-toggle-rounded">
                                 <ul>
-                                <li [className]="teamMember.role == 'tank' ? 'is-active' : ''">
+                                <li *ngIf="supportsRole(teamMember, 'tank')" [className]="getButtonState(teamMember, 'tank')">
                                     <a (click)="setRole(teamMember, 'tank')">
                                     <span>Tank</span>
                                     </a>
                                 </li>
-                                <li [className]="teamMember.role == 'healer' ? 'is-active' : ''">
+                                <li li *ngIf="supportsRole(teamMember, 'healer')" [className]="getButtonState(teamMember, 'healer')">
                                     <a (click)="setRole(teamMember, 'healer')">
                                     <span>Healer</span>
                                     </a>
                                 </li>
-                                <li [className]="teamMember.role == 'rdps' ? 'is-active' : ''">
+
+                                <li li *ngIf="supportsRole(teamMember, 'rdps')" [className]="getButtonState(teamMember, 'rdps')">
                                     <a (click)="setRole(teamMember, 'rdps')">
                                     <span>RDPS</span>
                                     </a>
                                 </li>
-                                <li [className]="teamMember.role == 'mdps' ? 'is-active' : ''">
+                                <li li *ngIf="supportsRole(teamMember, 'mdps')" [className]="getButtonState(teamMember, 'mdps')">
                                     <a (click)="setRole(teamMember, 'mdps')">
                                     <span>MDPS</span>
                                     </a>

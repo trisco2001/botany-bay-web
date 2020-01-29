@@ -1,0 +1,93 @@
+<section class="section">
+
+    <div class="container has-text-centered">
+        <h2 class="title">Team Breakdown</h2>
+        <div class="columns is-3">
+            <div class="column has-text-centered">
+                <h2 class="subtitle">Roles</h2>
+                <div *ngFor="let role of [roster.tanks, roster.healers, roster.rdps, roster.mdps]">
+                    <div class="card" *ngIf="role && role.members.length > 0">
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-left">
+                                    <figure class="image">
+                                        <i class="fas {{role.icon}} fa-1x"></i>
+                                    </figure>
+                                </div>
+                                <p class="media-left">{{role.name}}</p>
+                                <div class="media-content">
+                                    <p class="icon is-small"><i class="fas fa-user"></i> {{role.members.length}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column has-text-centered">
+                <h2 class="subtitle">Armor</h2>
+                <div class="card" *ngIf="roster">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image">
+                                    <i class="fas fa-shield-alt fa-1x"></i>
+                                </figure>
+                            </div>
+                            <p class="media-left">Plate</p>
+                            <div class="media-content">
+                                <p class="icon is-small"><i class="fas fa-user"></i>
+                                    {{roster.statistics.armorCounts.plate}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image">
+                                    <i class="fas fa-envelope fa-1x"></i>
+                                </figure>
+                            </div>
+                            <p class="media-left">Mail</p>
+                            <div class="media-content">
+                                <p class="icon is-small"><i class="fas fa-user"></i>
+                                    {{roster.statistics.armorCounts.mail}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image">
+                                    <i class="fas fa-hat-cowboy fa-1x"></i>
+                                </figure>
+                            </div>
+                            <p class="media-left">Leather</p>
+                            <div class="media-content">
+                                <p class="icon is-small"><i class="fas fa-user"></i>
+                                    {{roster.statistics.armorCounts.leather}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image">
+                                    <i class="fas fa-hat-wizard fa-1x"></i>
+                                </figure>
+                            </div>
+                            <p class="media-left">Cloth</p>
+                            <div class="media-content">
+                                <p class="icon is-small"><i class="fas fa-user"></i>
+                                    {{roster.statistics.armorCounts.cloth}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

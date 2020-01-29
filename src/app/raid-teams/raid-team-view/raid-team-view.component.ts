@@ -30,6 +30,14 @@ interface Roster {
   rdps: Role;
   mdps: Role;
   unset: Role;
+  statistics: {
+    armorCounts: {
+      plate: number,
+      mail: number,
+      leather: number,
+      cloth: number
+    }
+  }
 }
 
 interface RaidTeam {
@@ -66,6 +74,7 @@ export class RaidTeamViewComponent implements OnInit {
         .subscribe(raidTeam => {
           this.raidTeam = raidTeam;
           this.teamMembersService.getAllTeamMembers(this.raidTeam.id).subscribe(allTeamMembers => {
+            console.log("SETTING ALL TEAM MEMBERS");
             this.allTeamMembers = allTeamMembers;
             this.roster = {
               tanks: this.statsForRole(allTeamMembers, "tank"),
@@ -73,10 +82,25 @@ export class RaidTeamViewComponent implements OnInit {
               rdps: this.statsForRole(allTeamMembers, "rdps"),
               mdps: this.statsForRole(allTeamMembers, "mdps"),
               unset: this.statsForRole(allTeamMembers, null),
+              statistics: this.calculateStatistics(allTeamMembers)
             }
           })
         });
     })
+  }
+  calculateStatistics(allTeamMembers: AllTeamMembersResponse): { armorCounts: { plate: number; mail: number; leather: number; cloth: number; }; } {
+    const plate = allTeamMembers.Items.filter(member => this.classService.classes[member.characterData.class].armor == "plate").length;
+    const mail = allTeamMembers.Items.filter(member => this.classService.classes[member.characterData.class].armor == "mail").length;
+    const leather = allTeamMembers.Items.filter(member => this.classService.classes[member.characterData.class].armor == "leather").length;
+    const cloth = allTeamMembers.Items.filter(member => this.classService.classes[member.characterData.class].armor == "cloth").length;
+    return {
+      armorCounts: {
+        plate,
+        mail,
+        leather,
+        cloth
+      }
+    }
   }
 
   private statsForRole(allTeamMembers: AllTeamMembersResponse, role?: string) {

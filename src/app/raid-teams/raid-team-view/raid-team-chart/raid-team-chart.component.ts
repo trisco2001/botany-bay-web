@@ -77,7 +77,11 @@ export class RaidTeamChartComponent implements OnInit, OnChanges {
   }
 
   private convertRosterToMembers() {
-    return this.roster.healers.members
+    if (!this.roster) {
+      return [];
+    }
+    return []
+      .concat(this.roster.healers.members)
       .concat(this.roster.tanks.members)
       .concat(this.roster.rdps.members)
       .concat(this.roster.mdps.members)

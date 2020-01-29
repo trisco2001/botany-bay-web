@@ -3,53 +3,9 @@
         <h1 class="title">{{raidTeam.name}}</h1>
         <button class="button" (click)="navigateToManage()">Manage</button>
 
-        <div *ngFor="let role of [roster.tanks, roster.healers, roster.rdps, roster.mdps, roster.unset]">
-            <div class="card" *ngIf="role && role.members.length > 0">
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-left">
-                            <figure class="image is-48x48">
-                                <i class="fas {{role.icon}} fa-3x"></i>
-                            </figure>
-                        </div>
-                        <div class="media-content">
-                            <p class="title is-4">{{role.name}}</p>
-                            <p class="subtitle is-6">{{role.description}}</p>
-                            <span class="icon is-small"><i class="fas fa-user-shield"></i></span> {{role.averageItemLevel | number : '1.1-1'}}<br>
-                        </div>
-                    </div>
+        <app-raid-team-info [roster]="roster" [raidTeam]="raidTeam"></app-raid-team-info>
 
-
-                    <div class="columns is-multiline">
-                        <div class="column is-4" *ngFor="let teamMember of role.members">
-                            <a routerLink="/raid-teams/{{raidTeam.friendlyId}}/team-members/{{teamMember.server}}/{{teamMember.name}}">
-                                <div class="card">
-                                    <div class="card-content">
-                                        <div class="media">
-                                            <div class="media-left">
-                                                <figure class="image is-48x48">
-                                                    <img src="http://render-us.worldofwarcraft.com/character/{{teamMember.characterData.thumbnail}}" alt="{{teamMember.name}}">
-                                                </figure>
-                                            </div>
-                                            <div class="media-left">
-                                                <span class="icon is-small"><i class="fas fa-shield-alt"></i></span>
-                                                {{teamMember.characterData.items.averageItemLevelEquipped | number : '1.1-1'}}<br>
-                                                <span class="icon is-small"><i class="fas fa-heart"></i></span> 
-                                                {{teamMember.characterData.items.neck.itemLevel}}<br>
-                                            </div>
-                                            <div class="media-content">
-                                                <p class="title is-4">{{teamMember.name}}</p>
-                                                <p class="subtitle is-6">{{teamMember.server}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <app-raid-team-members [roster]="roster" [raidTeam]="raidTeam"></app-raid-team-members>
 
         <app-raid-team-chart [roster]="roster"></app-raid-team-chart>
 

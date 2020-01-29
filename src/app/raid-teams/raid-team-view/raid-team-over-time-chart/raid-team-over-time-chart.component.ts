@@ -54,7 +54,7 @@ export class RaidTeamOverTimeChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.raidTeamId) {
+    if (this.raidTeamId && this.allTeamMembers) {
       this.raidTeamsService.getTeamMetrics(this.raidTeamId).subscribe(teamMetrics => {
         this.teamMetrics = teamMetrics;
         this.refreshChartData(teamMetrics);
@@ -75,6 +75,11 @@ export class RaidTeamOverTimeChartComponent implements OnInit, OnChanges {
         metricsMap.set(current.raidTeamMemberId, [metric]);
       }
     });
+
+    if (!this.allTeamMembers || !this.allTeamMembers.Items) {
+      return null;
+    }
+
     this.barChartData = Array.from(metricsMap.keys()).map(key => {
       const split = key.split('-');
       const name = split.pop();
@@ -83,7 +88,6 @@ export class RaidTeamOverTimeChartComponent implements OnInit, OnChanges {
       if (!matchingMembers[0]) {
         return null;
       }
-      console.log(matchingMembers[0]);
       return { 
         label: name, 
         hidden: (this.selectedRole !== "all" && this.selectedRole !== matchingMembers[0].role),
